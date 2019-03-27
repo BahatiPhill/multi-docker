@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion":2,
+    "containerDefinitions": [
+        {
+            "name":"client",
+            "image":"gur79/multi-client",
+            "hostname":"client",
+            "essential": false
+        },
+        {
+            "name":"server",
+            "image":"gur79/multi-server",
+            "hostname":"api",
+            "essential": false
+        },
+        {
+            "name":"worker",
+            "image":"gur79/multi-worker",
+            "hostname":"worker",
+            "essential": false
+        },
+        {
+            "name":"nginx",
+            "image":"gur79/multi-nginx",
+            "hostname":"nginx",
+            "essential": true,
+            "portMappings":[
+                {
+                    "hostPort":80,
+                    "containerPort":80
+                }
+            ],
+            "links":["client","server"]
+        }
+    ]
+}
